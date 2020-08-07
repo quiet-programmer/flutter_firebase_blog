@@ -28,6 +28,7 @@ class _AddScreenState extends State<AddScreen> {
   }
 
   uploadBlog() async {
+    //TODO fix bug(can't send picture to database storage)
     setState(() {
       isLoading = true;
     });
