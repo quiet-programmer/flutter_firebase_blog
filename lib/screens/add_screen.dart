@@ -28,7 +28,6 @@ class _AddScreenState extends State<AddScreen> {
   }
 
   uploadBlog() async {
-    //TODO fix bug(can't send picture to database storage)
     setState(() {
       isLoading = true;
     });
@@ -42,7 +41,17 @@ class _AddScreenState extends State<AddScreen> {
       final StorageUploadTask task = firebaseStorageReg.putFile(selectedImage);
       var downloadUrl = await (await task.onComplete).ref.getDownloadURL();
       print("this is the download url $downloadUrl");
-      Navigator.of(context).pop();
+
+      Map<String, String> blogMap = {
+        "imgUr": downloadUrl,
+        "autherName": authorName,
+        "title": title,
+        "desc": desc,
+      };
+
+      crudMethods.addData(blogMap).then((resutl) {
+        Navigator.of(context).pop();
+      });
     } else {}
   }
 
