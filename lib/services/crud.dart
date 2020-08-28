@@ -6,4 +6,8 @@ class CrudMethods {
       print(e);
     });
   }
+
+  getAllData() async {
+    return await Firestore.instance.collection("blog").getDocuments();
+  }
 }
